@@ -12,16 +12,13 @@ const CartItem = props => {
             <figure className="image is-64x64">
               <img
                 src="https://bulma.io/images/placeholders/128x128.png"
-                alt={product.shortDesc}
               />
             </figure>
           </div>
           <div className="media-content">
             <b style={{ textTransform: "capitalize" }}>
-              {product.name}{" "}
-              <span className="tag is-primary">${product.price}</span>
+              {product.article_name}{" "}
             </b>
-            <div>{product.shortDesc}</div>
             <small>{`${amount} in cart`}</small>
           </div>
           <div

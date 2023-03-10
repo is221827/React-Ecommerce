@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+//import jwt_decode from 'jwt-decode';
 
-import AddProduct from './components/AddProduct';
+//import AddProduct from './components/AddProduct';
 import Cart from './components/Cart';
 import ProductList from './components/ProductList';
 
@@ -31,7 +31,7 @@ export default class App extends Component {
   addProduct = (product, callback) => {
     let products = this.state.products.slice();
     products.push(product);
-    //eventually here call to reduce number in db?
+    //TODO eventually: call api to reduce number in backend db?
     this.setState({ products }, () => callback && callback());
   };
 
@@ -42,6 +42,7 @@ export default class App extends Component {
     } else {
       cart[cartItem.id] = cartItem;
     }
+    //there might be a fuckup here. product.stock????
     if (cart[cartItem.id].amount > cart[cartItem.id].product.stock) {
       cart[cartItem.id].amount = cart[cartItem.id].product.stock;
     }
