@@ -18,7 +18,7 @@ const ProductItem = props => {
             <b style={{ textTransform: "capitalize" }}>
               {product.article_name}{" "}
             </b>
-            {/*TODO! api call to article */0 > 0 ? (
+            {/*TODO! api call to article */1 > 0 ? (
               <small>Available</small>
             ) : (
               <small className="has-text-danger">Out Of Stock</small>
