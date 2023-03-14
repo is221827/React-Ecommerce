@@ -22,7 +22,7 @@ export default class App extends Component {
   buyProduct = article_number => {
     let products = this.state.products.slice();
     if (products[article_number].items_available > 0) {
-      const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+articleId);
+      const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+article_number+'/');
       if (response.status === 200) {
         //send sms here!
         products[article_number].items_available -= 1;
