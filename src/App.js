@@ -17,10 +17,12 @@ export default class App extends Component {
   async componentDidMount() {
     const products = await axios.get('https://webshop-fe.azurewebsites.net/api/products/');
     this.setState({ products: products.data });
+    console.log(this.state.products);
   }
 
   buyProduct = article_number => {
-    let products = this.state.products.slice();
+    const products = this.state.products.slice();
+    console.log(products);
     if (products[article_number].items_available > 0) {
       const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+article_number+'/');
       if (response.status === 200) {
@@ -37,8 +39,7 @@ export default class App extends Component {
     return (
       <Context.Provider
         value={{
-          ...this.state,
-          buyProduct: this.buyProduct,
+          ...this.state, buyProduct: this.buyProduct
         }}
       >
         <Router ref={this.routerRef}>
@@ -62,8 +63,6 @@ export default class App extends Component {
                 }}
               >
                 <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
               </label>
             </div>
               <div className={`navbar-menu ${
@@ -76,7 +75,6 @@ export default class App extends Component {
             </nav>
             <Switch>
               <Route exact path="/" component={ProductList} />
-              <Route exact path="/products" component={ProductList} />
             </Switch>
           </div>
         </Router>
