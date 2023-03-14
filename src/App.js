@@ -15,13 +15,13 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    const products = await axios.get('http://webshop-fe.azurewebsites.net/api/products/');
+    const products = await axios.get('https://webshop-fe.azurewebsites.net/api/products/');
     this.setState({ products: products.data });
   }
 
   buyProduct = articleId => {
     if (this.state.products[articleId].amount > 0) {
-      const response = axios.get('http://webshop-fe.azurewebsites.net/api/order/'+articleId);
+      const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+articleId);
       if (response.status === 200) {
         let products = this.state.products.slice();
         products[articleId].amount -= 1;
