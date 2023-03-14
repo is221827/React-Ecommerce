@@ -32,12 +32,14 @@ const ProductList = props => {
           )}
         </div>
       </div>
+      <center>
       <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" poster="" data-setup='{"nativeControlsForTouch": false}'>
         <source src="https://katzenvideoaccount-euwe.streaming.media.azure.net/6ed2a022-755f-459a-9990-0e89cd4fb957/Twinkle Tush (720p_60fps_H264-12.ism/manifest(format=m3u8-cmaf)" type="application/vnd.ms-sstr+xml" />
         <p class="amp-no-js">
             To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
         </p>
       </video>
+      </center>
     </>
   );
 };

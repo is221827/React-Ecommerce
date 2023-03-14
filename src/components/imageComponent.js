@@ -4,7 +4,7 @@ export default class ImageComponent extends React.Component {
 
   handleShowDialog = () => {
     this.setState({ isOpen: !this.state.isOpen });
-    console.log("cliked");
+    //console.log("cliked");
   };
 
   render() {
