@@ -1,5 +1,4 @@
 import React from "react";
-import "../pic.css";
 export default class ImageComponent extends React.Component {
   state = { isOpen: false };
 
