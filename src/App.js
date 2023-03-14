@@ -17,17 +17,16 @@ export default class App extends Component {
   async componentDidMount() {
     const products = await axios.get('https://webshop-fe.azurewebsites.net/api/products/');
     this.setState({ products: products.data });
-    console.log(this.state.products);
   }
 
   buyProduct = article_number => {
     const products = this.state.products.slice();
-    console.log(products);
-    if (products[article_number].items_available > 0) {
+    let index = products.findIndex(product => product.article_number === article_number);
+    if (products[index].items_available > 0) {
       const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+article_number+'/');
       if (response.status === 200) {
         //send sms here!
-        products[article_number].items_available -= 1;
+        products[index].items_available -= 1;
         this.setState({products});
       } else {
         return "nono";
