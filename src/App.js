@@ -38,7 +38,7 @@ export default class App extends Component {
       <Context.Provider
         value={{
           ...this.state,
-          buyProduct: this.addToCart,
+          buyProduct: this.buyProduct,
         }}
       >
         <Router ref={this.routerRef}>

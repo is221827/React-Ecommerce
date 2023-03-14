@@ -1,6 +1,6 @@
 {
 	"globalHeaders": {
-	  "Access-Control-Allow-Origin": "*",
+	  "Access-Control-Allow-Origin": "https://webshop-fe.azurewebsites.net, https://katzenvideoaccount-euwe.streaming.media.azure.net",
 	  "Access-Control-Allow-Methods": "GET, OPTIONS"
 	}
 }
