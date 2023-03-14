@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
 import ProductList from './components/ProductList';
+import './App.css';
 
 import Context from "./Context";
 
