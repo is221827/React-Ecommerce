@@ -1,4 +1,9 @@
 import React from "react";
+//<ImageComponent src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}/>
+/*<img
+src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
+alt={product.article_description}
+/>*/
 
 const ProductItem = props => {
   const { product } = props;
@@ -8,10 +13,9 @@ const ProductItem = props => {
         <div className="media">
           <div className="media-left">
             <figure className="image is-64x64">
-              <img
-                src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
-                alt={product.article_description}
-              />
+            <ImageComponent src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
+              alt={product.article_description}
+            />
             </figure>
           </div>
           <div className="media-content">
