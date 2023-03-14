@@ -19,15 +19,15 @@ export default class App extends Component {
     this.setState({ products: products.data });
   }
 
-  buyProduct = articleId => {
+  buyProduct = article_number => {
     let products = this.state.products.slice();
-    if (products[articleId].amount > 0) {
+    if (products[article_number].items_available > 0) {
       const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+articleId);
       if (response.status === 200) {
-        products[articleId].amount -= 1;
+        //send sms here!
+        products[article_number].items_available -= 1;
         this.setState({products});
-      } else 
-      {
+      } else {
         return "nono";
       }
     }
