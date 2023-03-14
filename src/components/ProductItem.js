@@ -18,7 +18,7 @@ const ProductItem = props => {
             <b style={{ textTransform: "capitalize" }}>
               {product.article_name}{" "}
             </b>
-            {/*TODO! api call to article */1 > 0 ? (
+            { product.items_available > 0 ? (
               <small>Available</small>
             ) : (
               <small className="has-text-danger">Out Of Stock</small>
@@ -26,12 +26,7 @@ const ProductItem = props => {
             <div className="is-clearfix">
               <button
                 className="button is-small is-outlined is-primary   is-pulled-right"
-                onClick={() =>
-                  props.addToCart({
-                    id: product.article_number,
-                    product,
-                    amount: 1
-                  })
+                onClick={() => props.buyProduct(product.article_number)
                 }
               >
                 Add to Cart

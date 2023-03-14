@@ -4,7 +4,7 @@ import axios from 'axios';
 //import jwt_decode from 'jwt-decode';
 
 //import AddProduct from './components/AddProduct';
-import Cart from './components/Cart';
+//import Cart from './components/Cart';
 import ProductList from './components/ProductList';
 
 import Context from "./Context";
@@ -13,30 +13,36 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: {},
       products: []
     };
     this.routerRef = React.createRef();
   }
 
   async componentDidMount() {
-    let cart = localStorage.getItem("cart");
-
-    const products = await axios.get('http://a5b7e28e4fdc14a7d879bd7cc4fc2b79-31e9169111eba953.elb.eu-west-1.amazonaws.com/article');
-    cart = cart? JSON.parse(cart) : {};
-
-    this.setState({ products: products.data, cart });
+    const products = await axios.get('https://webshop-fe.azurewebsites.net/api/products');
+    this.setState({ products: products.data });
   }
 
-  addProduct = (product, callback) => {
+  /*addProduct = (product, callback) => {
     let products = this.state.products.slice();
     products.push(product);
-    //TODO eventually: call api to reduce number in backend db?
+    //??
     this.setState({ products }, () => callback && callback());
-  };
+  };*/
 
-  addToCart = cartItem => {
-    let cart = this.state.cart;
+  buyProduct = articleId => {
+    if (products[articleId].amount > 0) {
+      const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+articleId);
+      if (response.status == 200) {
+        let products = this.state.products.slice();
+        products[articleId].amount -= 1;
+        this.setState({products}, () => callback && callback());
+      } else 
+      {
+        return "nono";
+      }
+    }
+    /*let cart = this.state.cart;
     if (cart[cartItem.id]) {
       cart[cartItem.id].amount += cartItem.amount;
     } else {
@@ -47,10 +53,10 @@ export default class App extends Component {
       cart[cartItem.id].amount = cart[cartItem.id].product.stock;
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    this.setState({ cart });
+    this.setState({ cart });*/
   };
 
-  removeFromCart = cartItemId => {
+  /*removeFromCart = cartItemId => {
     let cart = this.state.cart;
     delete cart[cartItemId];
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -70,10 +76,7 @@ export default class App extends Component {
       if (cart[p.name]) {
         p.stock = p.stock - cart[p.name].amount;
 
-        axios.put(
-          `http://http://a5b7e28e4fdc14a7d879bd7cc4fc2b79-31e9169111eba953.elb.eu-west-1.amazonaws.com/article/${p.id}`,
-          { ...p },
-        )
+        axios.get('https://webshop-fe.azurewebsites.net/api/order/%7Barticleid%7D')
         // here is sms stuff missing
       }
       return p;
@@ -81,17 +84,14 @@ export default class App extends Component {
 
     this.setState({ products });
     this.clearCart();
-  };
+  };*/
 
   render() {
     return (
       <Context.Provider
         value={{
           ...this.state,
-          removeFromCart: this.removeFromCart,
-          addToCart: this.addToCart,
-          clearCart: this.clearCart,
-          checkout: this.checkout
+          buyProduct: this.addToCart,
         }}
       >
         <Router ref={this.routerRef}>
@@ -125,20 +125,10 @@ export default class App extends Component {
                 <Link to="/products" className="navbar-item">
                   Products
                 </Link>
-                <Link to="/cart" className="navbar-item">
-                  Cart
-                  <span
-                    className="tag is-primary"
-                    style={{ marginLeft: "5px" }}
-                  >
-                    { Object.keys(this.state.cart).length }
-                  </span>
-                </Link>
               </div>
             </nav>
             <Switch>
               <Route exact path="/" component={ProductList} />
-              <Route exact path="/cart" component={Cart} />
               <Route exact path="/products" component={ProductList} />
             </Switch>
           </div>
