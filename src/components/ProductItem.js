@@ -1,4 +1,5 @@
 import React from "react";
+import ImageComponent from "./component/ImageComponent";
 //<ImageComponent src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}/>
 /*<img
 src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
