@@ -31,12 +31,12 @@ export default class App extends Component {
   };*/
 
   buyProduct = articleId => {
-    if (products[articleId].amount > 0) {
+    if (this.state.products[articleId].amount > 0) {
       const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+articleId);
       if (response.status == 200) {
         let products = this.state.products.slice();
         products[articleId].amount -= 1;
-        this.setState({products}, () => callback && callback());
+        this.setState({products});
       } else 
       {
         return "nono";
