@@ -20,10 +20,10 @@ export default class App extends Component {
   }
 
   buyProduct = articleId => {
-    if (this.state.products[articleId].amount > 0) {
+    let products = this.state.products.slice();
+    if (products[articleId].amount > 0) {
       const response = axios.get('https://webshop-fe.azurewebsites.net/api/order/'+articleId);
       if (response.status === 200) {
-        let products = this.state.products.slice();
         products[articleId].amount -= 1;
         this.setState({products});
       } else 
