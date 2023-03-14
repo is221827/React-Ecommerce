@@ -20,7 +20,7 @@ const ProductList = props => {
               <ProductItem
                 product={product}
                 key={index}
-                addToCart={props.context.addToCart}
+                buyProduct={props.context.buyProduct}
               />
             ))
           ) : (
