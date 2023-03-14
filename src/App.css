@@ -36,7 +36,8 @@ top: 10%;
 }
 
 .image {
-width: 300px;
+  height: 100%;
+  width: auto;
 }
   
 @keyframes App-logo-spin {
