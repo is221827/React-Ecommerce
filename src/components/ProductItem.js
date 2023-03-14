@@ -9,7 +9,7 @@ const ProductItem = props => {
           <div className="media-left">
             <figure className="image is-64x64">
               <img
-                src="https://bulma.io/images/placeholders/128x128.png"
+                src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
                 alt={product.article_description}
               />
             </figure>
@@ -19,15 +19,14 @@ const ProductItem = props => {
               {product.article_name}{" "}
             </b>
             { product.items_available > 0 ? (
-              <small>Available</small>
+              <small>{' ' + product.items_available + ' in stock'}</small>
             ) : (
               <small className="has-text-danger">Out Of Stock</small>
             )}
             <div className="is-clearfix">
               <button
                 className="button is-small is-outlined is-primary   is-pulled-right"
-                onClick={() => props.buyProduct(product.article_number)
-                }
+                onClick={() => props.buyProduct(product.article_number)}
               >
                 Buy Product
               </button>

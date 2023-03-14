@@ -23,7 +23,7 @@ export default class App extends Component {
     const products = this.state.products.slice();
     let index = products.findIndex(product => product.article_number === article_number);
     if (products[index].items_available > 0) {
-      const response = axios.post('https://webshop-fe.azurewebsites.net/api/order/'+article_number+'/')
+      axios.post('https://webshop-fe.azurewebsites.net/api/order/'+article_number+'/')
       .then( response => {
         console.log(response);
         if (response.status === 200) {
