@@ -20,6 +20,32 @@ export default class App extends Component {
     this.setState({ products: products.data });
   }
 
+  async queueSms(articleId) {
+    // Retrieve the connection from an environment
+    // variable called AZURE_STORAGE_CONNECTION_STRING
+    const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
+
+    // Create a unique name for the queue
+    const queueName = "msgquue";
+
+    // Instantiate a QueueServiceClient which will be used
+    // to create a QueueClient and to list all the queues
+    const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
+
+    // Get a QueueClient which will be used
+    // to create and manipulate a queue
+    const queueClient = queueServiceClient.getQueueClient(queueName);
+
+    // Create the queue
+    //await queueClient.create();
+
+    messageText = 'Sold ' + articleId + ' ### \o/!';
+    console.log("Adding message to the queue: ", messageText);
+
+    // Add a message to the queue
+    await queueClient.sendMessage(messageText);
+  }
+
   buyProduct = article_number => {
     const products = this.state.products.slice();
     let index = products.findIndex(product => product.article_number === article_number);
@@ -28,7 +54,7 @@ export default class App extends Component {
       .then( response => {
         console.log(response);
         if (response.status === 200) {
-          //send sms here!
+          this.queueSms(article_number);
           products[index].items_available -= 1;
           this.setState({products});
         } else {
@@ -54,7 +80,7 @@ export default class App extends Component {
             aria-label="main navigation"
           >
             <div className="navbar-brand">
-              <b className="navbar-item is-size-4 ">ecommerce</b>
+              <b className="navbar-item is-size-4 ">dÖblingBling</b>
               <label
                 role="button"
                 class="navbar-burger burger"
@@ -72,7 +98,7 @@ export default class App extends Component {
               <div className={`navbar-menu ${
                   this.state.showMenu ? "is-active" : ""
                 }`}>
-                <Link to="/products" className="navbar-item">
+                <Link to="/" className="navbar-item">
                   Products
                 </Link>
               </div>
