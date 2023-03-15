@@ -3,7 +3,6 @@ import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
 import ProductList from './components/ProductList';
 import Context from "./Context";
-const { QueueServiceClient } = require("@azure/storage-queue");
 //import './App.css';
 
 export default class App extends Component {
@@ -20,33 +19,6 @@ export default class App extends Component {
     this.setState({ products: products.data });
   }
 
-  async queueSms(articleId) {
-    // Retrieve the connection from an environment
-    // variable called AZURE_STORAGE_CONNECTION_STRING
-    const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
-
-    // Create a unique name for the queue
-    const queueName = "msgquue";
-
-    // Instantiate a QueueServiceClient which will be used
-    // to create a QueueClient and to list all the queues
-    const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
-
-    // Get a QueueClient which will be used
-    // to create and manipulate a queue
-    const queueClient = queueServiceClient.getQueueClient(queueName);
-
-    // Create the queue
-    //await queueClient.create();
-
-    const messageText = 'Sold ' + articleId + ' ### wohoo!';
-    console.log("Adding message to the queue: ", messageText);
-
-    // Add a message to the queue
-    const response = await queueClient.sendMessage(messageText);
-    console.log(response);
-  }
-
   buyProduct = article_number => {
     const products = this.state.products.slice();
     let index = products.findIndex(product => product.article_number === article_number);
@@ -55,7 +27,7 @@ export default class App extends Component {
       .then( response => {
         console.log(response);
         if (response.status === 200) {
-          this.queueSms(article_number);
+          // SMS here?
           products[index].items_available -= 1;
           this.setState({products});
         } else {
