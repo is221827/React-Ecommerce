@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
 import ProductList from './components/ProductList';
+import Context from "./Context";
 const { QueueServiceClient } = require("@azure/storage-queue");
 //import './App.css';
-
-import Context from "./Context";
 
 export default class App extends Component {
   constructor(props) {
