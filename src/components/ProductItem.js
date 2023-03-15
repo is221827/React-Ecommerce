@@ -1,6 +1,6 @@
 import React from "react";
 //import ImageComponent from "./imageComponent";
-import ReactImageZoom from 'react-image-zoom';
+//import ReactImageZoom from 'react-image-zoom';
 
 //<ImageComponent src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}/>
 /*<img
