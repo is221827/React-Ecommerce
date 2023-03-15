@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
 import ProductList from './components/ProductList';
+const { QueueServiceClient } = require("@azure/storage-queue");
 //import './App.css';
 
 import Context from "./Context";
@@ -39,11 +40,12 @@ export default class App extends Component {
     // Create the queue
     //await queueClient.create();
 
-    messageText = 'Sold ' + articleId + ' ### \o/!';
+    const messageText = 'Sold ' + articleId + ' ### \o/!';
     console.log("Adding message to the queue: ", messageText);
 
     // Add a message to the queue
-    await queueClient.sendMessage(messageText);
+    const response = await queueClient.sendMessage(messageText);
+    console.log(response);
   }
 
   buyProduct = article_number => {
