@@ -6,18 +6,23 @@ import ReactImageZoom from 'react-image-zoom';
 /*<img
 src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
 alt={product.article_description}
-/>*/
+/>
+<ReactImageZoom {...imgprops} />
+const imgprops = {width: 60, zoomPosition: 'original', img: 'https://sapicture.blob.core.windows.net/sa-c-picture/' +product.article_number +'.jpg'};
+*/
 
 const ProductItem = props => {
   const { product } = props;
-  const imgprops = {width: 400, scale:1.5, zoomPosition: 'original', img: 'https://sapicture.blob.core.windows.net/sa-c-picture/' +product.article_number +'.jpg'};
   return (
     <div className=" column is-half">
       <div className="box">
         <div className="media">
           <div className="media-left">
             <figure className="image is-64x64">
-              <ReactImageZoom {...imgprops} />
+              <img
+                src={'https://sapicture.blob.core.windows.net/sa-c-picture/'+product.article_number+'.jpg'}
+                alt={product.article_description}
+              />
             </figure>
           </div>
           <div className="media-content">
