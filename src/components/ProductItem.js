@@ -10,7 +10,7 @@ alt={product.article_description}
 
 const ProductItem = props => {
   const { product } = props;
-  const imgprops = {width: 400, scale:1.5, zoomPosition: original, img: 'https://sapicture.blob.core.windows.net/sa-c-picture/' +product.article_number +'.jpg'};
+  const imgprops = {width: 400, scale:1.5, zoomPosition: 'original', img: 'https://sapicture.blob.core.windows.net/sa-c-picture/' +product.article_number +'.jpg'};
   return (
     <div className=" column is-half">
       <div className="box">
