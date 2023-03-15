@@ -39,7 +39,7 @@ export default class App extends Component {
     // Create the queue
     //await queueClient.create();
 
-    const messageText = 'Sold ' + articleId + ' ### \o/!';
+    const messageText = 'Sold ' + articleId + ' ### wohoo!';
     console.log("Adding message to the queue: ", messageText);
 
     // Add a message to the queue
